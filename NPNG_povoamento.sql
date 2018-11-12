@@ -12,7 +12,7 @@ USE NPNG;
 
 -- Povoamento da tabela "Cliente"
 INSERT INTO Cliente
-    (Nome,Nif(9))
+    (Nome,Nif)
     VALUES
         ("André Guilherme","123123123"),
         ("César Augusto","111222333"),
