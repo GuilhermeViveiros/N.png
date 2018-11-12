@@ -21,17 +21,18 @@ INSERT INTO Cliente
         ("Mini j","123456789"),
         ("Marco Dantas","123123789"),
         ("Carlos Alonso","4332143211"),        
- 		("Daniel GangaMen","12121234")
- 		("Gandalf","999999999"),
- 		("Frodo Baggins","111111111"),
- 		("Julio Cesar","987654321"),
- 		("Graca Solha","987456123"),
- 		("Nuno Valente","000123123",
-		("Aragorn","432143211"),
-		("Smeagol","123123666",
-		("Gollum","666666666");
+ 		("Daniel GangaMen","1112121234"),
+ 		("Gandalf","1999999999"),
+ 		("Frodo Baggins","11111111111"),
+ 		("Julio Cesar","1987654321"),
+ 		("Graca Solha","3987456123"),
+ 		("Nuno Valente","2000123123"),
+		("Aragorn","2432143211"),
+		("Smeagol","3123123666"),
+		("Gollum","6666666666");
 
 
+select *from cliente;
 
 -- Povoamento da tabela "Funcionário"
 
@@ -39,26 +40,28 @@ INSERT INTO Cliente
 INSERT INTO Funcionário
     (Categoria,Email,Nome,Número)
     VALUES
-("Personal_Trainer","aviveiros2012@gmail.com","Guilherme o Guerreiro","924546234"),
-("Nutricionista","aviveiros2011@gmail.com","Alberto Costa","923246234"),
-("Limpeza","a@gmail.com","Joaquina Freida","924546664"),
-("Limpeza","madeira12@gmail.com","Jesus o Belo","924545534"),        ("Limpeza","avi2012@gmail.com","Mateus Ferreira da Silva","911546234"),
-("Limpeza","avi@gmail.com","Guilherme Andrade","923456234"),        ("Personal_Trainer","vieiros@gmail.com","Fransisco João da Cunha","912345234"),
-("Personal Trainer","songoku@gmail.com","Goku","911122333"),
-("Personal Trainer","vegeta@gmail.com","Vegeta","9212312312"),
-("Limpeza","maria@gmail.com","Dona Maria","921212121");
+			("Personal_Trainer","aviveiros2012@gmail.com","Guilherme o Guerreiro","924546234"),
+			("Nutricionista","aviveiros2011@gmail.com","Alberto Costa","923246234"),
+			("Limpeza","a@gmail.com","Joaquina Freida","924546664"),
+			("Limpeza","madeira12@gmail.com","Jesus o Belo","924545534"), 
+			("Limpeza","avi2012@gmail.com","Mateus Ferreira da Silva","911546234"),
+			("Limpeza","avi@gmail.com","Guilherme Andrade","923456234"),       
+            ("Personal_Trainer","vieiros@gmail.com","Fransisco João da Cunha","912345234"),
+			("Personal Trainer","songoku@gmail.com","Goku","911122333"),
+			("Personal Trainer","vegeta@gmail.com","Vegeta","9212312312"),
+			("Limpeza","maria@gmail.com","Dona Maria","921212121");
 
 -- Povoamento da tabela "Aula"
 INSERT INTO Aula
-    (Nome, Descrição , Lotação ,idFuncionário)
+    (Nome, Descrição , Lotação ,idPersonal_Trainer)
     VALUES
         ("Cycling","Aula em bicicleta",10,5),
         ("Spinning","Aula de spinning",20,6),
         ("Running","Corrida coletiva",15,7),
         ("Pilates","Aula de Pilates",4,8),
-	 ("Karaté","Aula para defesa pessoal",20,1),
-	 ("Kick-Box","Aula para defesa pessoal",22,8),
-	 ("Judo","Aula para controlo de mente",14,9); 
+		("Karaté","Aula para defesa pessoal",20,1),
+		("Kick-Box","Aula para defesa pessoal",22,8),
+		("Judo","Aula para controlo de mente",14,9); 
 
 INSERT INTO Máquina
     (Nome,Descrição,Lotação)
@@ -79,8 +82,8 @@ INSERT INTO Pacote
     (Nome,idCliente,Personal_Trainer,Nutricionista)
     VALUES
         ("Full Pack",1,9,6),
-        ("Medium Pack",2,9,6);
-	 ("Single Pack",3,NULL,NULL);
+        ("Medium Pack",2,9,6),
+		("Single Pack",3,NULL,NULL);
 
 -- YYYY-MM-DD HH:MM:SS
 INSERT INTO Horário
@@ -89,13 +92,12 @@ INSERT INTO Horário
             ('2017-01-01 10:00:00','2017-01-01 20:00:00'),
             ('2017-01-01 12:10:00','2017-01-01 17:30:00'),
             ('2017-01-01 8:00:00','2017-01-01 10:00:00'),
-            ('2017-01-02 10:00:00','2017-01-02 14:00:00’),
+            ('2017-01-02 10:00:00','2017-01-02 14:00:00'),
             ('2017-01-02 10:00:00','2017-01-02 15:00:00'),
             ('2017-01-02 15:00:00','2017-01-02 22:00:00'),
             ('2017-01-02 16:00:00','2017-01-02 20:00:00'),
             ('2017-01-02 19:00:00','2017-01-02 22:00:00'),
             ('2017-01-02 20:00:00','2017-01-02 22:00:00');
-       Morre!!!!!!!!!!!!!!!!!!!!!!!  
 
 INSERT INTO Contactos
         (Telemóvel,idCliente,Email,Skype)
@@ -124,7 +126,7 @@ INSERT INTO Morada
 		("rua afonsina",888,12,"Porto"),
 		("Minas Tirith",1,13,"Terra Media"),
 		("Shire",13,14,"Terra Media"),
-		("Mordor,1,14,"Terra Media");
+		("Mordor",1,14,"Terra Media");
 
 INSERT INTO Personal_Trainer
         (idFuncionário,Classificação)
