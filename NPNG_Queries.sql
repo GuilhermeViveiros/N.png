@@ -65,8 +65,6 @@ Select C.Nome , A.Nome , Ar.Justificação from Cliente as C
 -- Quais os funcionários que trabalharam quando o clinte X esteve no ginásio no dia Y?
 
  -- 
- 
- select * From Aula_tem_Horário;
 
 -- Quais os funcionários que deram aulas ao cliente X num intervalo de tempo de Y a Z? 
 Select  F.Nome , F.Categoria , F.Email From Aula as A 

@@ -97,6 +97,7 @@ INSERT INTO Pacote
 select * from Personal_Trainer;        
         
 call criarHorarios('2018-01-01',date(now()));
+
 drop procedure criarHorarios;
 
 
