@@ -27,7 +27,7 @@ Select A.Nome From Aula as A
 		inner join Aula_tem_Cliente as AC
 			on AC.idAula = A.idAula
 				inner join (select idCliente From Cliente where idCliente = 1) as C 
-					on C.idCliente = AC.idCliente
+					on C.idCliente = AC.idCliente;
 
 
 -- Quais as aulas disponíveis a um cliente X? Function
