@@ -1,14 +1,11 @@
+Drop procedure IF EXISTS `criarHorarios`;
+
+DELIMITER %%
 CREATE DEFINER=`root`@`localhost` PROCEDURE `criarHorarios`(dataInicio Date, dataFinal Date)
 BEGIN
 	if dataInicio < dataFinal THEN
 		datas: LOOP
-				if DAYNAME(dataInicio) in ('Sunday', 'Saturday') then 
-					insert into Horário values
-						(CONCAT (dataInicio, ' 08:00:00'), CONCAT (dataInicio, ' 10:00:00'));
-				else
-					insert into Horário values
-						(CONCAT (dataInicio, ' 10:00:00'), CONCAT (dataInicio, ' 12:00:00'));
-				END if;
+				call criarHorarioDia(dataInicio);
 				SET dataInicio = ADDDATE(dataInicio, 1);
 				if dataInicio < dataFinal THEN
 					iterate datas;
@@ -16,4 +13,5 @@ BEGIN
 				Leave datas;
 		END LOOP datas;
 	END if;
-END
+END %%
+DELIMITER ;

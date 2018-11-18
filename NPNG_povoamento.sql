@@ -108,6 +108,14 @@ INSERT INTO Aula
 		(6,"Kick-Box","Aula para defesa pessoal",22,8),
 		(7,"Judo","Aula para controlo de mente",14,9); 
 
+
+call criarHorarios('2018-11-5',date(now()));
+call criarHorarioDia('2018-05-04');
+
+-- delete from Horário where 0 = 0;
+-- SELECT * FROM Horário;
+-- SELECT * FROM Horário where Time(Fim) = '23:00:00';
+
 INSERT INTO Aula_tem_Horário
 	(idAula,Horário_Inicio,Horário_Fim)
     VALUES
@@ -184,7 +192,7 @@ INSERT INTO Morada
 
 
 -- Povoamento da tabela Pacote_Tem_Horário_Para_Musculação
-INSERT INTO Pacote_Tem_Horário_Para_Musculação
+INSERT INTO Pacote_tem_Horário_Para_Musculação
     (idPacote,Horário_Inicio,Horário_Fim)
     VALUES
         (1,'2017-01-01 10:00:00','2018-01-01 10:00:00');
@@ -206,13 +214,7 @@ INSERT INTO Cliente_teve_Personal_Trainer
     (2,7,"Está sempre distraído");
             
 	
-call criarHorarios('2018-01-01',date(now()));
 
-drop procedure criarHorarios;
-
-
-delete from Horário where 0 = 0;
-SELECT * FROM Horário;
 			
 		
 
