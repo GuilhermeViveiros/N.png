@@ -6,14 +6,16 @@ Use Npng;
 -- Trigger -> Por exemplo , quando insiro Pacotes , o Pacote tem que vir associado com aulas ou não ..etc
 
 
--- Quais os clientes que frequentaram aulas num certo horário? Function
-Select C.idCliente, C.Nome  from Aula as A
-	inner join (select * from Aula_tem_Horário where Horário_inicio = '2017-01-01 10:00:00' and Horário_Fim = '2017-01-01 20:00:00') as AH
-		on A.idAula = AH.idAula
-			inner join Aula_tem_Cliente as AC
-				on AC.idAula = AH.idAula
-					inner join Cliente as C
-						on C.idCliente = AC.idCliente;
+-- Quais os clientes que frequentaram aulas num certo horário? Function Done
+Select C.Nome From Cliente as C where idCliente in 
+     ( select  CP.idCliente from Aula_tem_Horário as AH  
+		inner join Aula as A 
+			on A.idAula = AH.idAula
+				inner join Pacote_tem_Aula as PA
+					on A.idAula = PA.idAula
+						inner join Cliente_tem_Pacote as CP
+							on CP.idPacote = PA.idPacote 
+								where AH.Horário_inicio = '2017-01-01 10:00:00' and AH.Horário_Fim = '2017-01-06 10:00:00' ); 
 
 
 -- Quais as aulas que foram dadas num certo horário? Function
@@ -22,24 +24,21 @@ Select A.Nome From Aula as A
 
 
 -- Quais o clientes que tiveram a aula X  num certo horário E num certo dia da semana? Function
-Select A.Nome From Aula as A 
-	inner join (select idAula From Aula_tem_Horário where Horário_Inicio = '2017-01-01 10:00:00' and Horário_Fim = '2017-01-01 20:00:00') as H on A.idAula = H.idAula
-		inner join Aula_tem_Cliente as AC
-			on AC.idAula = A.idAula
-				inner join (select idCliente From Cliente where idCliente = 1) as C 
-					on C.idCliente = AC.idCliente;
+Select * From Cliente as C where idCliente in
+	(select idCliente from Cliente_tem_Pacote where idPacote in
+		(select CP.idPacote from Aula_tem_Horário as AH 
+			inner join Pacote_tem_Aula as PA on AH.idAula = PA.idAula
+				inner join Cliente_tem_Pacote as CP on CP.idPacote = PA.idPacote
+					where  AH.Horário_Inicio = '2017-01-01 10:00:00' and AH.Horário_Fim = '2017-01-01 20:00:00'));
+    
 
 
 -- Quais as aulas disponíveis a um cliente X? Function
-Select A.Nome from Cliente as C 
-	inner join Pacote as P
-		on P.idPacote = C.idPacote
-			inner join Pacote_tem_Aula as Pa
-				on Pa.idPacote = P.idPacote
-					inner join Aula as A 
-						on A.idAula = Pa.idAula
-							where C.idCliente = 1
-								order by A.Nome;
+Select A.Nome , A.Descrição from Aula as A where idAula in 
+	( select PA.idAula from Pacote_tem_Aula as PA where idPacote in
+		(select CP.idPacote from Cliente_tem_Pacote as CP where CP.idCliente = 1));
+	
+    
 
 -- Quais os personal trainer que o cliente X teve? Function
 Select C.Nome , C.Nif , F.Nome,  C_teve_PT.Reclamação from Cliente as C 
@@ -53,14 +52,15 @@ Select C.Nome , C.Nif , F.Nome,  C_teve_PT.Reclamação from Cliente as C
 
 
 
--- Quais as aulas recomendadas do cliente X ordenadas por nome ?
-Select C.Nome , A.Nome , Ar.Justificação from Cliente as C
-	inner join AulasRecomendadas as Ar 
-		on Ar.idCliente = C.idCliente 
-			inner join Aula as A 
-				on A.idAula = Ar.idAula
-					where C.nome = "César Augusto"
-						order by A.Nome;
+
+Select C.Nome , A.Nome , Ar.Justificação from Cliente as C 
+	inner join Plano_de_Treino as PT 
+		on PT.idPlano_de_Treino = C.idPlano_de_Treino
+			inner join AulasRecomendadas as AR 
+				on AR.idPlano_de_Treino = PT.idPlano_de_Treino
+					inner join Aula as A
+						on A.idAula = AR.idAula
+							where C.Nome = "André Guilherme";
 
 -- Quais os funcionários que trabalharam quando o clinte X esteve no ginásio no dia Y?
 
@@ -70,12 +70,17 @@ Select C.Nome , A.Nome , Ar.Justificação from Cliente as C
 Select  F.Nome , F.Categoria , F.Email From Aula as A 
 	inner join (select * From Aula_tem_Horário where Horário_Inicio <= '2017-01-01 10:0:00' and Horário_Fim >=  '2017-01-01 10:00:00') as AH
 		on A.idAula = AH.idAula -- vejo quais as aulas que foram dadas naquele tempo
-			inner join ( select * From Aula_tem_Cliente where idCliente = 1) as AC 
-				on AC.idAula = A.idAula -- aulas em que o cliente frequentou
-					inner join Personal_Trainer as PT 
-						on PT.idFuncionário = A.idPersonal_Trainer -- quando tem o nosso PT
-							inner join Funcionário as F on F.idFuncionário = PT.idFuncionário; -- Funcionário
-	
+			inner join Personal_Trainer as PT 
+				on PT.idFuncionário = A.idPersonal_Trainer
+					inner join Funcionário as F
+						on F.idFuncionário = PT.idFuncionário
+							inner join Pacote_tem_Aula as PA 
+								on PA.idAula = A.idAula
+									inner join Cliente_tem_Pacote as CP
+										on CP.idPacote = PA.idPacote
+											inner join Cliente as C
+												on C.idCliente = CP.idCliente
+													where C.Nome = "André Guilherme"; 
 
 -- Quais as aulas que foram dadas pelo funcionário com mais classificação de X a Y? -- Procedure ALMOST
 
