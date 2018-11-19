@@ -5,19 +5,16 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `criarHorarioDia`(dia date)
 BEGIN
 	declare horaInicial TIME;
     declare horafinal TIME;
-    declare turno TIME;
     declare horaAux TIME;
     
 	if DAYNAME(dia) in ('Sunday', 'Saturday') then
 			SET horaInicial = '10:00:00';
             SET horaAux = '12:00:00';
             SET horaFinal = '20:00:00';
-			SET turno = '05:00:00';
 	else 	
 			SET horaInicial = '8:00:00';
 			SET horaAux = '10:00:00';
             SET horaFinal = '22:00:00';
-            SET turno = '05:00:00';
 	END if;
     
 	horarios: LOOP
@@ -34,5 +31,5 @@ BEGIN
 		END if;
 		leave horarios;
     END LOOP;
-END
+END %%
 DELIMITER ;
