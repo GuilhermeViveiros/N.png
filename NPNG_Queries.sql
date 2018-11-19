@@ -7,6 +7,7 @@ Use Npng;
 
 -- Uma função apenas devolve STRING <> INTEGER <> REAL <> DECIMAL
 
+-- ---------------------------------------------------------------------------------------Procedures -------------------------------------------------------------------------------------------------------------------------------
 
 -- Quais os clientes que teem aulas num certo horário
 call ShowClassesFromClientsWithSchedule(1, '2017-01-01 10:00:00' , '2017-01-06 10:00:00' );
@@ -30,19 +31,50 @@ call ClassesOfClient(1);
 call ClientHadPersonalTrainer(1);
 
 
--- Quais os funcionários que trabalharam quando o clinte X esteve no ginásio no dia Y
-
-
 -- Quais os funcionários que deram aulas ao cliente X num intervalo de tempo de Y a Z
 call EmployesWithScheduleWithClients(1,'2017-01-01 10:00:00' , '2017-01-01 20:00:00');
 
 
--- Qual as top 5 aulas com alunos inscritos num ccerto intervalo de tempo
 
--- Qual os Personal Trainer que dao mais aulas?
 
--- Quais as aulas que foram dadas pelo funcionário com mais classificação de X a Y? -- Procedure ALMOST
+-- Qual as top 5 aulas num certo intervalo de tempo
+call Top5Classes('2017-01-01 10:00:00', '2017-01-06 10:00:00' );
 
--- Quantos pacotes tem o ginasio disponiveis? Function DONE
 
--- Adicionar um pacote a um cliente X -- Procedure
+
+-- Quais as 5 aulas que foram dadas pelo funcionário com mais classificação de X a Y
+-- Versão do sql não suporta este tipo de subquerrys ???
+Select * from Aula as A where idPersonal_Trainer in
+	(Select F.idFuncionário  from Personal_Trainer as PT  -- estou a chamar o PT com melhor classificação noutra funcção (ver view)
+		inner join Funcionário as F 
+			on F.idFuncionário = PT.idFuncionário
+				order by PT.Classificação desc
+					limit 1)
+						limit 5;
+
+
+-- Adicionar um pacote a um cliente x
+call AddPackageForClient(x,x,x,x);
+
+
+
+
+-- ---------------------------------------------------------------------------------------Triggers -------------------------------------------------------------------------------------------------------------------------------
+
+-- Sempre que apagamos uma apagmos algo apagar tudo oque tem haver com isso
+
+-- Cliente
+-- Aula
+-- Pacote
+-- Plano de Treino
+-- Máquina
+
+-- ---------------------------------------------------------------------------------------Views -------------------------------------------------------------------------------------------------------------------------------
+-- Qual os top 5 Personal Trainers que dao mais aulas
+select * from Top5PT;
+
+-- Quantos pacotes tem o ginasio disponiveis Function
+Select Count(0) From Pacote;
+
+-- Qual o funcionário com a melhor classificação 
+Select * From PtWithBetterPoints;
