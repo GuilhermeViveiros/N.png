@@ -36,6 +36,11 @@ call ClientHadPersonalTrainer(1);
 -- Quais os funcionários que deram aulas ao cliente X num intervalo de tempo de Y a Z
 call EmployesWithScheduleWithClients(1,'2017-01-01 10:00:00' , '2017-01-01 20:00:00');
 
+
+-- Qual as top 5 aulas com alunos inscritos num ccerto intervalo de tempo
+
+-- Qual os Personal Trainer que dao mais aulas?
+
 -- Quais as aulas que foram dadas pelo funcionário com mais classificação de X a Y? -- Procedure ALMOST
 
 -- Quantos pacotes tem o ginasio disponiveis? Function DONE
