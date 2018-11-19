@@ -18,16 +18,16 @@ USE Npng;
 INSERT INTO Funcionário
     (idFuncionário,Categoria,Email,Nome,Número)
     VALUES
-			(1,"Personal_Trainer","aviveiros2012@gmail.com","Guilherme o Guerreiro","924546234"),
-			(2,"Nutricionista","aviveiros2011@gmail.com","Alberto Costa","923246234"),
-			(3,"Limpeza","a@gmail.com","Joaquina Freida","924546664"),
-			(4,"Limpeza","madeira12@gmail.com","Jesus o Belo","924545534"), 
-			(5,"Limpeza","avi2012@gmail.com","Mateus Ferreira da Silva","911546234"),
-			(6,"Limpeza","avi@gmail.com","Guilherme Andrade","923456234"),       
-            (7,"Personal_Trainer","vieiros@gmail.com","Fransisco João da Cunha","912345234"),
-			(8,"Personal Trainer","songoku@gmail.com","Goku","911122333"),
-			(9,"Personal Trainer","vegeta@gmail.com","Vegeta","9212312312"),
-			(10,"Limpeza","maria@gmail.com","Dona Maria","921212121");
+			(1,"Personal_Trainer","aviveiros2012@gmail.com","Guilherme Guerreiro","924546234"),
+			(2,"Nutricionista","alberto@costa.com","Alberto Costa","922790030"),
+			(3,"Limpeza","joaquinaF@gmail.com","Joaquina Freida","924546664"),
+			(4,"Limpeza","job@hotmail.com","Jesus o Belo","917408289"), 
+			(5,"Limpeza","lilisasilva@live.com","Liliana da Silva","925461860"),
+			(6,"Limpeza","jandrade@gmail.com","Joana Andrade","914763669"),       
+            (7,"Personal_Trainer","francisco@cunha.com","Fransisco Cunha","927616601"),
+			(8,"Personal Trainer","maria_machado@Machadolda.com","Madalena Machado","911122333"),
+			(9,"Personal Trainer","jrsm@macedos.pt","José Macedo","917815023"),
+			(10,"Limpeza","carlos@gmail.com","Carlos Silva","927783669");
 
 
 -- Povoamento da tabela "Máquina"
@@ -58,11 +58,11 @@ INSERT INTO Personal_Trainer
         
 -- Povoamento da tabela Pacote
 INSERT INTO Pacote
-    (idPacote,Nome,id_Personal_Trainer,id_Nutricionista)
+    (idPacote,Nome,id_Personal_Trainer,id_Nutricionista, Preço)
     VALUES
-        (1,"Full Pack",1,6),
-        (2,"Medium Pack",8,6),
-		(3,"Single Pack",NULL,NULL);
+        (1,"Full Pack",1,6,20),
+        (2,"Medium Pack",8,6,15),
+		(3,"Single Pack",NULL,NULL,10);
 
 	
 -- Povoamento do Plano_de_Treino
@@ -71,28 +71,50 @@ INSERT INTO Plano_de_Treino
     VALUES
 		(20,100,198,"Endomorfo","Perda de peso",1),
 		(20,70,187,"Ectomorfo","Ganho de massa muscular",2),
-		(20,50,180,"Mesomorfo","Perda de massa gorda",3);
-        
+		(20,80,178,"Mesomorfo","Perda de massa gorda",3);
+
+
+-- Povoamento da tabela Plano_de_Treino_Recomenda_Máquina
+INSERT INTO Plano_de_Treino_Recomenda_Máquina
+	(idPlano_de_Treino,idMáquina,Justificação)
+    Values
+    (1,5,"Queima gordura e aumenta o cardio"),
+    (1,7,"Queima gordura e aumenta o cardio"),
+    (1,9,"Queima gordura e aumenta o cardio"),
+    (2,1,"Aumento na massa muscular"),
+    (2,2,"Aumento na massa muscular"),
+    (2,3,"Aumento na massa muscular"),
+    (2,4,"Aumento na massa muscular"),
+    (2,6,"Aumento na massa muscular"),
+    (2,8,"Aumento na massa muscular"),
+    (3,1,"Substitui massa gorda por muscular"),
+    (3,3,"Substitui massa gorda por muscular"),
+    (3,4,"Substitui massa gorda por muscular"),
+    (3,6,"Substitui massa gorda por muscular"),
+    (3,5,"Queima gordura e aumenta o cardio"),
+    (3,7,"Queima gordura e aumenta o cardio");
+
+
 -- Povoamento da tabela "Cliente"
 INSERT INTO Cliente
     (idCliente,Nome,Nif,idPlano_de_Treino)
     VALUES
-        (1,"André Guilherme","123123123",1),
-        (2,"César Augusto","111222333",1),
-        (3,"Discipulo","333222111",1),
-        (4,"Angelo André Castro Sousa","101202303",1),
-        (5,"Mini j","123456789",2),
-        (6,"Marco Dantas","123123789",2),
-        (7,"Carlos Alonso","433214321",2),        
- 		(8,"Daniel GangaMen","111212124",2),
- 		(9,"Gandalf","999999999",2),
- 		(10,"Frodo Baggins","111111111",2),
- 		(11,"Julio Cesar","987654321",3),
- 		(12,"Graca Solha","398745613",3),
- 		(13,"Nuno Valente","200123123",3),
-		(14,"Aragorn","243214321",3),
-		(15,"Smeagol","123123666",3),
-		(16,"Gollum","666666666",3);
+        (1,"André Guilherme","240123113",1),
+        (2,"César Augusto","251218194",1),
+        (3,"Discipulo","256466747",1),
+        (4,"Angelo Sousa","240512003",1),
+        (5,"Fernada Silva","258312652",2),
+        (6,"Marco Dantas","251250536",2),
+        (7,"Carlos Alonso","255752212",2),        
+ 		(8,"Daniel GangaMen","240588318",2),
+ 		(9,"Julia Freitas","255380817",2),
+ 		(10,"João Andrade","250406451",2),
+ 		(11,"Julio Cesar","255383679",3),
+ 		(12,"Graca Solha","244328031",3),
+ 		(13,"Mariana Ferreira","258496851",3),
+		(14,"Nunu Valente","243214321",3),
+		(15,"Sofia Teixeira","257841348",3),
+		(16,"Maria Rodrigues","249313497",3);
 
 
 
@@ -115,7 +137,7 @@ call criarHorarioDia('2018-05-04');
 -- delete from Horário where 0 = 0;
 -- SELECT * FROM Horário;
 -- SELECT * FROM Horário where Time(Fim) = '23:00:00';
-
+/*
 INSERT INTO Aula_tem_Horário
 	(idAula,Horário_Inicio,Horário_Fim)
     VALUES
@@ -123,14 +145,18 @@ INSERT INTO Aula_tem_Horário
 		(1,'2017-01-01 10:00:00','2017-01-06 10:00:00'),
 		(2,'2018-01-01 10:00:00','2018-01-01 13:00:00'),
 		(3,'2017-01-01 10:00:00','2017-01-01 20:00:00'),
-		(4,'2017-01-01 12:10:00','2017-01-01 17:30:00');
+		(4,'2017-01-01 12:10:00','2017-01-01 17:30:00');*/
     
 
 INSERT INTO AulasRecomendadas
 	(idPlano_de_treino , idAula, Justificação)
     VALUES
-		(1,1,"Resistencia"),
-        (1,2,"Resistencia");
+		(1,1,"Aumento da resistencia"),
+        (1,3,"Aumento da resistencia"),
+        (2,6,"Aumento da massa muscular"),
+        (2,3,"Aumento da resistencia"),
+        (3,2,"Aumento da resistencia"),
+        (3,3,"Aumento da resistencia");
 		
 	
 -- Povoamento da tabela "Horário"
@@ -156,8 +182,11 @@ INSERT INTO Cliente_tem_Pacote
 	(idCliente,idPacote,Data_inicial,Data_final)
     VALUES
 		(1,1,'2017-01-01 10:00:00','2018-01-01 10:00:00'),
-        (2,2,'2017-01-01 10:00:00','2017-01-06 10:00:00'),
-        (3,3,'2018-01-01 10:00:00','2018-01-01 13:00:00');
+        (10,2,'2017-01-01 10:00:00','2017-01-06 10:00:00'),
+        (4,3,'2018-01-01 10:00:00','2018-01-01 13:00:00'),
+        (7,2,'2018-01-01 10:00:00','2018-01-01 13:00:00'),
+        (14,3,'2018-01-01 10:00:00','2018-01-01 13:00:00'),
+        (12,3,'2018-01-01 10:00:00','2018-01-01 13:00:00');
         
 
 -- Povoamento da tabela Contactos
@@ -209,9 +238,10 @@ INSERT INTO Cliente_teve_Personal_Trainer
 	(idCliente,idPersonal_Trainer,reclamação)
     VALUES
     (1,7,"Esteve sempre distraído"),
-    (1,8,"Não havia motivação sufeciente"),
+    (1,8,"Não havia motivação suficiente"),
     (1,9,"Simplesmente era feio"),
     (2,7,"Está sempre distraído");
+
             
 	
 
