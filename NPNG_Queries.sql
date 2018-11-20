@@ -2,10 +2,14 @@ Use Npng;
 
 SET SQL_SAFE_UPDATES = 0;
 
+-- SELECT * FROM Cliente;
+-- SELECT * FROM Cliente_teve_Personal_Trainer;
+-- delete from Cliente where idCliente = 1;
+
 -- SELECT * FROM Aula where idPersonal_Trainer = 8;
 -- SELECT * FROM Personal_Trainer where idFuncionário = 8;
 -- SELECT * FROM Pacote where id_Personal_Trainer = 8;
--- -SELECT * FROM Funcionário where idFuncionário = 8;
+-- SELECT * FROM Funcionário where idFuncionário = 8;
 -- DELETE FROM Personal_Trainer where idFuncionário = 8;
 
 -- Procedure -> Usar mais para quando remover cliente, também eliminar pacotes and stuff like that

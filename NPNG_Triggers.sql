@@ -26,6 +26,7 @@ CREATE TRIGGER remCliente BEFORE DELETE ON Cliente
 			DELETE FROM Cliente_tem_Pacote where idCliente = OLD.idCliente;
             DELETE FROM Morada where idCliente = OLD.idCliente;
             DELETE FROM Contactos where idCliente = OLD.idCLiente;
+            DELETE FROM Cliente_teve_Personal_Trainer where idCliente = OLD.idCliente;
 		End %%
 DELIMITER ;		
 
@@ -48,6 +49,7 @@ CREATE TRIGGER remPT BEFORE DELETE ON Personal_Trainer
 			UPDATE Pacote SET id_Personal_Trainer = null
 				where id_Personal_Trainer = OLD.idFuncionário;
             DELETE FROM Aula where idPersonal_Trainer = OLD.idFuncionário;
+            DELETE FROM Cliente_teve_Personal_Trainer where idPersonal_Trainer = OLD.idFuncionário;
 		End %%
 DELIMITER ;	
 
