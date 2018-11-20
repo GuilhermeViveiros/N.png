@@ -7,8 +7,6 @@
 -- Caso de trabalho : Ginásio intitulado No Pain No Gain(N.png)
 -- Povoamento parcial da base de dados.
 
-SET SQL_SAFE_UPDATES = 0;
-
 -- Base de dados de trabalho
 USE Npng;
 
