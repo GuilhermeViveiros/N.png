@@ -47,6 +47,15 @@ CREATE TRIGGER remPT BEFORE DELETE ON Personal_Trainer
 		Begin
 			UPDATE Pacote SET id_Personal_Trainer = null
 				where id_Personal_Trainer = OLD.idFuncionário;
+            DELETE FROM Aula where idPersonal_Trainer = OLD.idFuncionário;
+		End %%
+DELIMITER ;	
+
+DROP TRIGGER IF EXISTS remPT2;
+DELIMITER %%
+CREATE TRIGGER remPT2 AFTER DELETE ON Personal_Trainer
+	For each row
+		Begin
 			DELETE FROM Funcionário where idFuncionário = OLD.idFuncionário;
 		End %%
 DELIMITER ;	

@@ -1,5 +1,13 @@
 Use Npng;
 
+SET SQL_SAFE_UPDATES = 0;
+
+-- SELECT * FROM Aula where idPersonal_Trainer = 8;
+-- SELECT * FROM Personal_Trainer where idFuncionário = 8;
+-- SELECT * FROM Pacote where id_Personal_Trainer = 8;
+-- -SELECT * FROM Funcionário where idFuncionário = 8;
+-- DELETE FROM Personal_Trainer where idFuncionário = 8;
+
 -- Procedure -> Usar mais para quando remover cliente, também eliminar pacotes and stuff like that
 -- View -> Para obtermos resultados sem dar parametros
 -- Function -> Retorna valores , basicamente tudo oque quereremos observar para um determinado fator é através de funções
