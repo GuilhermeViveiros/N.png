@@ -7,6 +7,8 @@
 -- Caso de trabalho : Ginásio intitulado No Pain No Gain(N.png)
 -- Povoamento parcial da base de dados.
 
+SET SQL_SAFE_UPDATES = 0;
+
 -- Base de dados de trabalho
 USE Npng;
 
@@ -16,16 +18,16 @@ USE Npng;
 INSERT INTO Funcionário
     (idFuncionário,Categoria,Email,Nome,Número)
     VALUES
-			(1,"Personal_Trainer","aviveiros2012@gmail.com","Guilherme Guerreiro","924546234"),
-			(2,"Nutricionista","alberto@costa.com","Alberto Costa","922790030"),
-			(3,"Limpeza","joaquinaF@gmail.com","Joaquina Freida","924546664"),
-			(4,"Limpeza","job@hotmail.com","Jesus o Belo","917408289"), 
-			(5,"Limpeza","lilisasilva@live.com","Liliana da Silva","925461860"),
-			(6,"Limpeza","jandrade@gmail.com","Joana Andrade","914763669"),       
-            (7,"Personal_Trainer","francisco@cunha.com","Fransisco Cunha","927616601"),
-			(8,"Personal Trainer","maria_machado@Machadolda.com","Madalena Machado","911122333"),
-			(9,"Personal Trainer","jrsm@macedos.pt","José Macedo","917815023"),
-			(10,"Limpeza","carlos@gmail.com","Carlos Silva","927783669");
+			(1,"Nutricionista","alberto@costa.com","Alberto Costa","922790030"),
+			(2,"Limpeza","joaquinaF@gmail.com","Joaquina Freida","924546664"),
+			(3,"Limpeza","job@hotmail.com","Jesus o Belo","917408289"), 
+			(4,"Limpeza","lilisasilva@live.com","Liliana da Silva","925461860"),
+			(5,"Limpeza","jandrade@gmail.com","Joana Andrade","914763669"),
+            (6,"Limpeza","carlos@gmail.com","Carlos Silva","927783669"),
+            (7,"Personal_Trainer","aviveiros2012@gmail.com","Guilherme Guerreiro","924546234"),
+            (8,"Personal_Trainer","francisco@cunha.com","Fransisco Cunha","927616601"),
+			(9,"Personal Trainer","maria_machado@Machadolda.com","Madalena Machado","911122333"),
+			(10,"Personal Trainer","jrsm@macedos.pt","José Macedo","917815023");
 
 
 -- Povoamento da tabela "Máquina"
@@ -48,7 +50,7 @@ INSERT INTO Máquina
 INSERT INTO Personal_Trainer
 	(idFuncionário, Classificação)
     VALUES
-		(1, 5),
+		(10, 5),
         (7, 3),
         (8, 7),
         (9, 8);
@@ -58,8 +60,8 @@ INSERT INTO Personal_Trainer
 INSERT INTO Pacote
     (idPacote,Nome,id_Personal_Trainer,id_Nutricionista, Preço)
     VALUES
-        (1,"Full Pack",1,6,20),
-        (2,"Medium Pack",8,6,15),
+        (1,"Full Pack",10,1,20),
+        (2,"Medium Pack",8,1,15),
 		(3,"Single Pack",NULL,NULL,10);
 
 	
@@ -120,30 +122,18 @@ INSERT INTO Cliente
 INSERT INTO Aula
     (idAula, Nome , Descrição , Lotação ,idPersonal_Trainer)
     VALUES
-        (1,"Cycling","Aula em bicicleta",10,1),
+        (1,"Cycling","Aula em bicicleta",10,10),
         (2,"Spinning","Aula de spinning",20,7),
         (3,"Running","Corrida coletiva",15,8),
         (4,"Pilates","Aula de Pilates",4,9),
-		(5,"Karaté","Aula para defesa pessoal",20,1),
+		(5,"Karaté","Aula para defesa pessoal",20,10),
 		(6,"Kick-Box","Aula para defesa pessoal",22,8),
 		(7,"Judo","Aula para controlo de mente",14,9); 
 
 
-call criarHorarios('2018-11-5',date(now()));
-call criarHorarioDia('2018-05-04');
+call criarHorarios('2018-11-17',date(now()));
+call darPTHorario('2018-11-5', 4);
 
--- delete from Horário where 0 = 0;
--- SELECT * FROM Horário;
--- SELECT * FROM Horário where Time(Fim) = '23:00:00';
-/*
-INSERT INTO Aula_tem_Horário
-	(idAula,Horário_Inicio,Horário_Fim)
-    VALUES
-		(1,'2017-01-01 10:00:00','2018-01-01 10:00:00'),
-		(1,'2017-01-01 10:00:00','2017-01-06 10:00:00'),
-		(2,'2018-01-01 10:00:00','2018-01-01 13:00:00'),
-		(3,'2017-01-01 10:00:00','2017-01-01 20:00:00'),
-		(4,'2017-01-01 12:10:00','2017-01-01 17:30:00');*/
     
 
 INSERT INTO AulasRecomendadas
@@ -156,7 +146,7 @@ INSERT INTO AulasRecomendadas
         (3,2,"Aumento da resistencia"),
         (3,3,"Aumento da resistencia");
 		
-	
+/*	
 -- Povoamento da tabela "Horário"
 INSERT INTO Horário
         (Inicio,Fim)
@@ -172,7 +162,7 @@ INSERT INTO Horário
             ('2017-01-02 15:00:00','2017-01-02 22:00:00'),
             ('2017-01-02 16:00:00','2017-01-02 20:00:00'),
             ('2017-01-02 19:00:00','2017-01-02 22:00:00'),
-            ('2017-01-02 20:00:00','2017-01-02 22:00:00');
+            ('2017-01-02 20:00:00','2017-01-02 22:00:00');*/
 
 
 -- Povoamento da tabela Cliente_tem_Pacote

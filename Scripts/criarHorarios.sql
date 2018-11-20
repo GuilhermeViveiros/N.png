@@ -1,3 +1,4 @@
+USE Npng;
 Drop procedure IF EXISTS `criarHorarios`;
 
 DELIMITER %%
