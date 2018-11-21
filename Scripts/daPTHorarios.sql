@@ -1,4 +1,4 @@
-CREATE PROCEDURE `darPTHorario` (dia Date, nPTs int)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `darPTHorarios`(dia Date, nPTs int)
 BEGIN
 	declare i int;
     declare horaInicial TIME;
