@@ -66,6 +66,7 @@ Select * from Aula as A where idPersonal_Trainer in
 
 
 -- Adicionar um pacote a um cliente x
+-- Necessário um id do cliente, id do Pacote , data de inicio e data final Id Int
 call AddPackageForClient(x,x,x,x);
 
 
