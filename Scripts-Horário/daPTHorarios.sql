@@ -1,3 +1,8 @@
+USE Npng;
+Drop procedure IF EXISTS `darPTHorarios`;
+
+DELIMITER %%
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `darPTHorarios`(dia Date, nPTs int)
 BEGIN
 	declare i int;
@@ -31,4 +36,5 @@ BEGIN
 			leave turno;
         end if;
 	end loop turno;
-END
+END %%
+DELIMITER ;

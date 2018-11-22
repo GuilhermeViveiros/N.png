@@ -1,3 +1,8 @@
+USE Npng;
+Drop procedure IF EXISTS `darFuncHorarios`;
+
+DELIMITER %%
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `darFuncHorarios`(dia Date, nFuncs INT)
 BEGIN
 	declare horaInicial TIME;
@@ -30,4 +35,5 @@ BEGIN
 			leave horarios;
 		end if;
     END LOOP;
-END
+END %%
+DELIMITER ;
