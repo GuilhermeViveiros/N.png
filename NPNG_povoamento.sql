@@ -160,7 +160,7 @@ INSERT INTO Aula
 
 -- Povoamento da tabela Aula_tem_Horário
 -- Povoamento da tabela Cliente_frequentou_Aula_com_Horário
-call criarHorarios(DATE_ADD(date(now()), INTERVAL -1 WEEK), DATE_ADD(date(now()), INTERVAL 3 WEEK));
+call criarHorarios('2018-11-01', '2018-11-30');
     
 
 -- Povoamento da tabela "AulasRecomendadas"
