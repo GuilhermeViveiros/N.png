@@ -14,4 +14,6 @@ BEGIN
 
 	call darFuncHorarios(dia, 5);
     call darPTHorarios(dia, 4);
+    call darHorarioMusculacao(dia);
+    call darHorarioAula(dia);
 END

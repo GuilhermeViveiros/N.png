@@ -5,7 +5,6 @@ BEGIN
 				call criarHorarioDia(dataInicio);
                 call criarTurnoDia(dataInicio);
                 call darHorarios(dataInicio);
-                call darHorarioMusculacao(dataInicio);
                 
 				SET dataInicio = ADDDATE(dataInicio, 1);
 				if dataInicio < dataFinal THEN

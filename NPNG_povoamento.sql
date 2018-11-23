@@ -147,21 +147,45 @@ INSERT INTO Aula
     VALUES
         (1,"Cycling","Aula em bicicleta",10,10),
         (2,"Spinning","Aula de spinning",20,7),
-        (3,"Running","Corrida coletiva",15,8),
-        (4,"Pilates","Aula de Pilates",4,9),
-		(5,"Karaté","Aula para defesa pessoal",20,10),
-		(6,"Kick-Box","Aula para defesa pessoal",22,8),
+        (3,"Running","Corrida coletiva",15,10),
+        (4,"Pilates","Aula de Pilates",4,8),
+		(5,"Karaté","Aula para defesa pessoal",20,8),
+		(6,"Kick-Box","Aula para defesa pessoal",22,9),
 		(7,"Judo","Aula para controlo de mente",14,9); 
 
 
 -- Povoamento da tabela "Horário"
 -- Povoamento da tabela "Funcionário_tem_Horário"
 -- Povoamento da tabela "Pacote_Tem_Horário_Para_Musculação"
-
 -- Povoamento da tabela Aula_tem_Horário
--- Povoamento da tabela Cliente_frequentou_Aula_com_Horário
 call criarHorarios('2018-11-01', '2018-11-30');
-    
+
+
+-- Povoamento da tabela Cliente_frequentou_Aula_com_Horário
+INSERT INTO Cliente_frequentou_Aula_com_Horário
+	(idCliente,idAula,Horário_Inicio,Horário_Fim)
+	VALUES
+		(2,1,'2018-11-01 8:00:00','2018-11-01 10:00:00'),
+        (2,3,'2018-11-02 12:00:00','2018-11-02 14:00:00'),
+        (2,6,'2018-11-05 18:00:00','2018-11-05 20:00:00'),
+        (2,1,'2018-11-15 8:00:00','2018-11-15 10:00:00'),
+        (2,3,'2018-11-16 12:00:00','2018-11-16 14:00:00'),
+        (2,6,'2018-11-19 18:00:00','2018-11-19 20:00:00'),
+        (3,1,'2018-11-01 8:00:00','2018-11-01 10:00:00'),
+        (3,3,'2018-11-02 12:00:00','2018-11-02 14:00:00'),
+        (3,6,'2018-11-05 18:00:00','2018-11-05 20:00:00'),
+        (3,1,'2018-11-08 8:00:00','2018-11-08 10:00:00'),
+        (3,3,'2018-11-09 12:00:00','2018-11-09 14:00:00'),
+        (3,6,'2018-11-12 18:00:00','2018-11-12 20:00:00'),
+        (3,1,'2018-11-15 8:00:00','2018-11-15 10:00:00'),
+        (3,3,'2018-11-16 12:00:00','2018-11-16 14:00:00'),
+        (3,6,'2018-11-19 18:00:00','2018-11-19 20:00:00'),
+        (3,1,'2018-11-22 8:00:00','2018-11-22 10:00:00'),
+        (3,3,'2018-11-23 12:00:00','2018-11-23 14:00:00'),
+        (3,6,'2018-11-26 18:00:00','2018-11-26 20:00:00');
+        
+
+
 
 -- Povoamento da tabela "AulasRecomendadas"
 INSERT INTO AulasRecomendadas
@@ -174,27 +198,9 @@ INSERT INTO AulasRecomendadas
         (3,2,"Aumento da resistencia"),
         (3,3,"Aumento da resistencia");
 		
-/*
+
 -- Povoamento da tabela Cliente_tem_Pacote
-INSERT INTO Cliente_tem_Pacote
-	(idCliente,idPacote,Data_inicial,Data_final)
-    VALUES
-		(1,1,'2017-01-01 10:00:00','2018-01-01 10:00:00'),
-        (2,2,'2017-01-01 10:00:00','2018-01-01 10:00:00'),
-        (3,2,'2017-01-01 10:00:00','2018-01-01 10:00:00'),
-        (4,3,'2018-01-01 10:00:00','2018-01-01 13:00:00'),
-        (5,1,'2017-01-01 10:00:00','2018-01-01 10:00:00'),
-        (6,2,'2017-01-01 10:00:00','2018-01-01 10:00:00'),
-        (7,1,'2018-01-01 10:00:00','2018-01-01 13:00:00'),
-        (8,3,'2017-01-01 10:00:00','2018-01-01 10:00:00'),
-        (9,2,'2017-01-01 10:00:00','2018-01-01 10:00:00'),
-        (10,1,'2017-01-01 10:00:00','2018-01-01 10:00:00'),
-        (11,3,'2017-01-01 10:00:00','2018-01-01 10:00:00'),
-        (12,3,'2017-01-01 10:00:00','2018-01-01 10:00:00'),
-        (13,1,'2017-01-01 10:00:00','2018-01-01 10:00:00'),
-        (14,3,'2018-01-01 10:00:00','2018-01-01 13:00:00'),
-        (15,2,'2018-01-01 10:00:00','2018-01-01 13:00:00'),
-        (16,1,'2017-01-01 10:00:00','2018-01-01 10:00:00');*/
+call darPacoteCliente();
             
             
 -- Povoamento da tabela Morada
@@ -235,8 +241,6 @@ INSERT INTO Pacote_tem_Aula
 	VALUES
 	(1,1),(1,2),(1,3),(1,4),(1,5),
     (2,1),(2,3),(2,6);
-
-            
 	
 
 			
