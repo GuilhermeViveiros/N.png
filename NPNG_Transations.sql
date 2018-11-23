@@ -1,19 +1,27 @@
 use Npng;
 
-
-
 SELECT * FROM Cliente_teve_Personal_Trainer;
 SELECT * FROM Pacote;
 SELECT * FROM Cliente_tem_Pacote;
+SELECT * FROM Personal_Trainer;
 
-call addPT_To_Pacote(1, 1, "testing");
-DELETE FROM Cliente_teve_Personal_Trainer;
+SELECT id_Personal_Trainer from Pacote where idPacote = 1;
+
+INSERT INTO Cliente_teve_Personal_Trainer (idCliente, idPersonal_Trainer, Reclamação)
+						 SELECT * FROM (SELECT "1", "1") AS tmp
+							WHERE NOT EXISTS (
+								SELECT * FROM Cliente_teve_Personal_Trainer 
+									WHERE idCliente = "1" and idPersonal_Trainer = "1"
+							) LIMIT 1; 
+
+
+call addPT_To_Pacote(7, 1, "testing");
+
 Drop procedure IF EXISTS `addPT_To_Pacote`;
 
 DELIMITER %%
 CREATE DEFINER=`root`@`localhost` PROCEDURE `addPT_To_Pacote`(in idPT int, in idPac int, in reclamação VARCHAR(200))
 BEGIN
-	DECLARE oldPT int default null;
 	DECLARE done BOOL default 0;
     DECLARE err BOOL DEFAULT 0;
 	DECLARE id int;
@@ -22,30 +30,31 @@ BEGIN
 	DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = 1;
 	DECLARE CONTINUE HANDLER FOR SQLEXCEPTION SET err = 1;
     SELECT @oldPT := id_Personal_Trainer from Pacote where idPacote = idPac;
-	OPEN idsClientes;
 			
-		START TRANSACTION READ WRITE;
+		START TRANSACTION;
+			SET FOREIGN_KEY_CHECKS=0;
+			UPDATE Pacote SET id_Personal_trainer = idPT
+							where idPacote = idPac;
+			SET FOREIGN_KEY_CHECKS=1;
+			
+            OPEN idsClientes;
 			insertLOOP : LOOP
 				FETCH idsClientes INTO id;
 				if  done then
 					leave insertLOOP;
 				end if;
 				
-				-- if oldPT is not null then
-                SELECT "I am here";
+				if @oldPT is not null then
 					INSERT INTO Cliente_teve_Personal_Trainer (idCliente, idPersonal_Trainer, Reclamação)
-						 SELECT * FROM (SELECT id, oldPT, reclamação) AS tmp
+						 SELECT id, @oldPt, reclamação FROM (SELECT id, @oldPT) AS tmp
 							WHERE NOT EXISTS (
 								SELECT * FROM Cliente_teve_Personal_Trainer 
 									WHERE idCliente = id and idPersonal_Trainer = oldPT
 							) LIMIT 1;
-				-- END if;        
+				END if;        
 				ITERATE insertLOOP;
 			END LOOP;
 			Close idsClientes;
-			
-			UPDATE Pacote SET id_Personal_trainer = idPT
-				where idPacote = idPac;
 		
 		if err then rollback;
 		else commit;
@@ -92,59 +101,77 @@ BEGIN
 END %%;
 DELIMITER ;
 
-DROP PROCEDURE IF EXISTS `SwapScheduleFromWorkersBetween`;
+SELECT * FROM Aula where idPersonal_Trainer = 7;
+SELECT * FROM Aula where idPersonal_Trainer = 8;
+SELECT * FROM Funcionário_tem_Horário where idFuncionário = 7;
+SELECT * FROM Funcionário_tem_Horário where idFuncionário = 8;
 
+SELECT idAula from Aula
+				where idPersonal_Trainer = 7;
+
+call SwapScheduleFromWorkers(8,7, '2018-11-02');
+
+
+DROP PROCEDURE IF EXISTS `SwapScheduleFromWorkers`;
+-- Troca os horário de dois funcionários, caso sejam PTs estes trocam as aulas que dão para serem compatíveis com os novos horários 
 DELIMITER %%
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SwapScheduleFromWorkersBetween`(in w1 int, in w2 int, in dataInicial Date, in dataFinal Date)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SwapScheduleFromWorkers`(in w1 int, in w2 int, inicio Date)
 	BEGIN
+		
 		DECLARE err BOOL DEFAULT 0;
-		DECLARE done BOOL default 0;
 		DECLARE CategoriaW1 Varchar(45);
         DECLARE CategoriaW2 Varchar(45);
-		DECLARE aula int;
-        DECLARE aulasW1 CURSOR FOR SELECT idAulas from Aula as A
-			INNER JOIN Aula_tem_Horário AS AtH ON A.idAula = AtH.idAula
-				where A.idPersonal_Trainer = w1 and Date(Horário_Inicio) >= dataInicial and Date(Horário_Fim) <= dataFinal;
-        DECLARE aulasW2 CURSOR FOR SELECT idAulas from Aula as A
-			INNER JOIN Aula_tem_Horário AS AtH ON A.idAula = AtH.idAula
-				where A.idPersonal_Trainer = w2 and Date(Horário_Inicio) >= dataInicial and Date(Horário_Fim) <= dataFinal;DECLARE CONTINUE HANDLER FOR SQLEXCEPTION SET err = 1;
-		DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = 1;
+		DECLARE aulaToSwap int;
+		DECLARE aulasW1 CURSOR FOR SELECT idAula from Aula
+				where idPersonal_Trainer = w1;
+        DECLARE aulasW2 CURSOR FOR SELECT idAula from Aula
+				where idPersonal_Trainer = w2;
+		DECLARE CONTINUE HANDLER FOR SQLEXCEPTION SET err = 1;
 
         SELECT @CategoriaW1 := Categoria FROM Funcionário Where idFuncionário = w1;
         SELECT @CategoriaW2 := Categoria FROM Funcionário Where idFuncionário = w2;
         
         START Transaction;
-			if CategoriaW1 = CategoriaW2 THEN
-				if CategoriaW1 = "Personal_Trainer" THEN
+			if @CategoriaW1 = @CategoriaW2 THEN
+				if @CategoriaW1 = 'Personal_Trainer' THEN
 					OPEN aulasW1;
-					trocarAulasW1: LOOP
-						Fetch aulasW1 INTO aula;
-                        if  done then
-							leave trocarAulasW1;
-						end if;
-						UPDATE Aula SET idPersonal_Trainer = w2 where idAula = aulaW1;
-						ITERATE trocarAulasW1;
-                    END LOOP;
+                    OPEN aulasW2;
+					BEGIN
+						DECLARE done BOOL default FALSE;
+						DECLARE CONTINUE HANDLER FOR NOT FOUND SET done =TRUE;
+						trocarAulasW1: LOOP
+							Fetch aulasW1 INTO aulaToSwap;
+							if  done  then
+								leave trocarAulasW1;
+							end if;
+							UPDATE Aula SET idPersonal_Trainer = w2 where idAula = aulaToSwap;
+							ITERATE trocarAulasW1;
+						END LOOP;
+					END;
                     CLOSE aulasW1;
-                    SET done = 0;
                     
-                    OPEN aulasW1;
-					trocarAulasW2: LOOP
-						Fetch aulasW2 INTO aula;
-                        if  done then
-							leave trocarAulasW2;
-						end if;
-						UPDATE Aula SET idPersonal_Trainer = w1 where idAula = aulaW2;
-						ITERATE trocarAulasW2;
-                    END LOOP;
-                    CLOSE aulasW1;
+					BEGIN
+						DECLARE done BOOL default FALSE;
+						DECLARE CONTINUE HANDLER FOR NOT FOUND SET done =TRUE;
+						trocarAulasW2: LOOP
+							Fetch aulasW2 INTO aulaToSwap;
+							if  done  then
+								leave trocarAulasW2;
+							end if;
+							UPDATE Aula SET idPersonal_Trainer = w1 where idAula = aulaToSwap;
+							ITERATE trocarAulasW2;
+						END LOOP;
+					END;
+                    CLOSE aulasW2;
 				END if;
                 
-			END if;
-			
+				UPDATE Funcionário_tem_Horário SET 
+					idFuncionário = if (idFuncionário = w1, w2, w1)
+					where idFuncionário in (w1, w2) and inicio <= Date(Horário_Inicio);
+		
+            END if;
         if err then rollback;
 			else commit;
-		END IF;
-        
+		END IF;        
     END %%
 DELIMITER ;

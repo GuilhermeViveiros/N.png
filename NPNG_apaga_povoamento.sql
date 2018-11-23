@@ -1,4 +1,5 @@
 use Npng;
+SET SQL_SAFE_UPDATES = 0;
 
 delete from Pacote_tem_Aula
 	where 0=0;
