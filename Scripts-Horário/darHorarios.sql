@@ -1,3 +1,7 @@
+USE `Npng`;
+DROP procedure IF EXISTS `darHorarios`;
+
+DELIMITER %%
 CREATE DEFINER=`root`@`localhost` PROCEDURE `darHorarios`(dia DATE)
 BEGIN
 	if DAYNAME(dia) in ('Sunday', 'Saturday') then
@@ -16,4 +20,6 @@ BEGIN
     call darPTHorarios(dia, 4);
     call darHorarioMusculacao(dia);
     call darHorarioAula(dia);
-END
+END%%
+
+DELIMITER ;

@@ -1,3 +1,7 @@
+USE `Npng`;
+DROP procedure IF EXISTS `darHorarioAula`;
+
+DELIMITER %%
 CREATE DEFINER=`root`@`localhost` PROCEDURE `darHorarioAula`(dia Date)
 BEGIN
 	declare idA int;
@@ -31,4 +35,6 @@ BEGIN
         iterate horario;
     end loop horario;
     
-END
+END%%
+
+DELIMITER ;

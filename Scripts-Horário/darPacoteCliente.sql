@@ -1,3 +1,7 @@
+USE `Npng`;
+DROP procedure IF EXISTS `darPacoteCliente`;
+
+DELIMITER %%
 CREATE DEFINER=`root`@`localhost` PROCEDURE `darPacoteCliente`()
 BEGIN
 	INSERT INTO Horário
@@ -34,4 +38,6 @@ BEGIN
         (14,3,'2018-07-01 13:00:00','2018-11-01 13:00:00'),
         (15,3,'2018-10-27 17:00:00','2018-11-27 17:00:00'),
         (16,2,'2018-09-30 16:00:00','2018-11-30 16:00:00');
-END
+END%%
+
+DELIMITER ;

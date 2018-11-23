@@ -99,46 +99,46 @@ INSERT INTO Plano_de_Treino_Recomenda_Máquina
 
 -- Povoamento da tabela "Cliente"
 INSERT INTO Cliente
-    (idCliente,Nome,Nif,idPlano_de_Treino)
+    (idCliente,Nome,Nif,idPlano_de_Treino,Email)
     VALUES
-        (1,"André Guilherme","240123113",1),
-        (2,"César Augusto","251218194",1),
-        (3,"Discipulo","256466747",1),
-        (4,"Angelo Sousa","240512003",1),
-        (5,"Fernada Silva","258312652",2),
-        (6,"Marco Dantas","251250536",2),
-        (7,"Carlos Castro","255752212",2),        
- 		(8,"Daniel Apelido","240588318",2),
- 		(9,"Julia Freitas","255380817",2),
- 		(10,"João Andrade","250406451",2),
- 		(11,"Julio Cesar","255383679",3),
- 		(12,"Graca Solha","244328031",3),
- 		(13,"Mariana Ferreira","258496851",3),
-		(14,"Nunu Valente","243214321",3),
-		(15,"Sofia Teixeira","257841348",3),
-		(16,"Maria Rodrigues","249313497",3);
+        (1,"André Guilherme","240123113",1,"viveiros@gmail.com"),
+        (2,"César Augusto","251218194",1,"cesarAugusto@gmail.com"),
+        (3,"Discipulo","256466747",1,"discipulo88@yahoo.com"),
+        (4,"Angelo Sousa","240512003",1,"angeloSousa@hotmail.com"),
+        (5,"Fernada Silva","258312652",2,"fernada@silva.com"),
+        (6,"Marco Dantas","251250536",2,"marco@bichao.com"),
+        (7,"Carlos Castro","255752212",2,"cpac@castro.com.pt"),        
+ 		(8,"Daniel Apelido","240588318",2,"daniel@gmail.com"),
+ 		(9,"Julia Freitas","255380817",2,"julia@freitas.com"),
+ 		(10,"João Andrade","250406451",2,"joao@andrade.com"),
+ 		(11,"Julio Cesar","255383679",3,"julio@cesar.jc"),
+ 		(12,"Graca Solha","244328031",3,"graca@solha.br"),
+ 		(13,"Mariana Ferreira","258496851",3,"mariana@ferreira.es"),
+		(14,"Nunu Valente","243214321",3,"nunu@valente.pt"),
+		(15,"Sofia Teixeira","257841348",3,"sofia@teixeira.com"),
+		(16,"Maria Rodrigues","249313497",3,"maria@rodrigues.pt");
 
 
 -- Povoamento da tabela Contactos
 INSERT INTO Contactos 
 	(idCliente,Telemóvel) 
     VALUES
-            (1,926790525),-- "viveiros@gmail.com"),
-            (2,926888525),-- "cesarAugusto@gmail.com"),
-			(3,966585445),-- "discipulo88@yahoo.com"),
-            (4,965143652),-- "angeloSousa@hotmail.com"),
-            (5,923395959),-- "fernada@silva.com"),
-            (6,922819157),-- "marco@bichao.com"),
-            (7,932032329),-- "cpac@castro.com.pt"),
-            (8,917161409),-- "daniel@gmail.com"),
-            (9,916471122),-- "julia@freitas.com"),
-            (10,917329235),-- "joao@andrade.com"),
-            (11,921224028),-- "julio@cesar.jc"),
-            (12,918923558),-- "graca@solha.br"),
-            (13,965969174),-- "mariana@ferreira.es"),
-            (14,968427945),-- "nunu@valente.pt"),
-            (15,926568225),-- "sofia@teixeira.com"),
-            (16,914523051);-- "maria@rodrigues.pt");
+            (1,926790525),
+            (2,926888525),
+			(3,966585445),
+            (4,965143652),
+            (5,923395959),
+            (6,922819157),
+            (7,932032329),
+            (8,917161409),
+            (9,916471122),
+            (10,917329235),
+            (11,921224028),
+            (12,918923558),
+            (13,965969174),
+            (14,968427945),
+            (15,926568225),
+            (16,914523051);
 
 
 -- Povoamento da tabela "Aula"
@@ -171,6 +171,7 @@ INSERT INTO Cliente_frequentou_Aula_com_Horário
         (2,1,'2018-11-15 8:00:00','2018-11-15 10:00:00'),
         (2,3,'2018-11-16 12:00:00','2018-11-16 14:00:00'),
         (2,6,'2018-11-19 18:00:00','2018-11-19 20:00:00'),
+        
         (3,1,'2018-11-01 8:00:00','2018-11-01 10:00:00'),
         (3,3,'2018-11-02 12:00:00','2018-11-02 14:00:00'),
         (3,6,'2018-11-05 18:00:00','2018-11-05 20:00:00'),
@@ -229,17 +230,15 @@ INSERT INTO Morada
 INSERT INTO Cliente_teve_Personal_Trainer
 	(idCliente,idPersonal_Trainer,Justificação)
     VALUES
-    (1,8,"Esteve sempre distraído"),
-    (1,7,"Não havia motivação suficiente"),
-    (1,10,"Simplesmente era feio"),
-    (2,8,"Muito distraído");
+    (1,8,"Troca de Pacote"),
+    (2,8,"Mudança de horário por parte do Personal Trainer");
 
 
 -- Povoamento da tabela Pacote_tem_Aula
 INSERT INTO Pacote_tem_Aula
 	(idPacote,idAula)
 	VALUES
-	(1,1),(1,2),(1,3),(1,4),(1,5),
+	(1,1),(1,2),(1,3),(1,4),(1,5),(1,6),
     (2,1),(2,3),(2,6);
 	
 
