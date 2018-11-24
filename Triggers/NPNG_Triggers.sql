@@ -81,3 +81,19 @@ DELIMITER ;
             
 -- SELECT * FROM Máquina;
 -- SELECT * FROM Plano_de_Treino_Recomenda_Máquina;
+
+DROP TRIGGER IF EXISTS insertClienteTeveAula;
+DELIMITER %%
+CREATE TRIGGER insertClienteTeveAula BEFORE INSERT ON Cliente_frequentou_Aula_com_Horário 
+	For each row 
+		Begin
+			DECLARE numAlunos int default 0;
+            DECLARE lotacao int default 0;
+			SET numAlunos = (SELECT Count(0) FROM Cliente_frequentou_Aula_com_Horário
+				where idAula = NEW.idAula and Horário_Início = New.Horário_Inicio and Horário_Fim = New.Horário_Fim);
+			SET lotacao = (SELECT lotação FROM Aula where idAula = NEW.idAula);
+            if numAlunos > lotacao THEN
+				SET NEW.idAula = null;
+            END if;
+		End %%
+DELIMITER ;	

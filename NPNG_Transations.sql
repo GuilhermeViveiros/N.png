@@ -7,20 +7,12 @@ SELECT * FROM Personal_Trainer;
 
 SELECT id_Personal_Trainer from Pacote where idPacote = 1;
 
-INSERT INTO Cliente_teve_Personal_Trainer (idCliente, idPersonal_Trainer, Reclamação)
-						 SELECT * FROM (SELECT "1", "1") AS tmp
-							WHERE NOT EXISTS (
-								SELECT * FROM Cliente_teve_Personal_Trainer 
-									WHERE idCliente = "1" and idPersonal_Trainer = "1"
-							) LIMIT 1; 
-
-
-call addPT_To_Pacote(7, 1, "testing");
+call addPT_To_Pacote(1, 1, "testing");
 
 Drop procedure IF EXISTS `addPT_To_Pacote`;
 
 DELIMITER %%
-CREATE DEFINER=`root`@`localhost` PROCEDURE `addPT_To_Pacote`(in idPT int, in idPac int, in reclamação VARCHAR(200))
+CREATE DEFINER=`root`@`localhost` PROCEDURE `addPT_To_Pacote`(in idPT int, in idPac int, in justif VARCHAR(200))
 BEGIN
 	DECLARE done BOOL default 0;
     DECLARE err BOOL DEFAULT 0;
@@ -35,7 +27,7 @@ BEGIN
 			SET FOREIGN_KEY_CHECKS=0;
 			UPDATE Pacote SET id_Personal_trainer = idPT
 							where idPacote = idPac;
-			SET FOREIGN_KEY_CHECKS=1;
+			
 			
             OPEN idsClientes;
 			insertLOOP : LOOP
@@ -45,17 +37,18 @@ BEGIN
 				end if;
 				
 				if @oldPT is not null then
-					INSERT INTO Cliente_teve_Personal_Trainer (idCliente, idPersonal_Trainer, Reclamação)
-						 SELECT id, @oldPt, reclamação FROM (SELECT id, @oldPT) AS tmp
-							WHERE NOT EXISTS (
-								SELECT * FROM Cliente_teve_Personal_Trainer 
-									WHERE idCliente = id and idPersonal_Trainer = oldPT
-							) LIMIT 1;
+					INSERT INTO Cliente_teve_Personal_Trainer (idCliente, idPersonal_Trainer, Justificação)
+						VALUE(id, @oldPt, justif);
+                        -- SELECT * FROM (SELECT id, @oldPt, justificação)
+							-- where not exists(
+							-- SELECT * FROM Cliente_teve_Personal_Trainer
+									-- where idCliente = id and idPersonal_Trainer = @oldPt
+                            -- ) Limit 1;
 				END if;        
 				ITERATE insertLOOP;
 			END LOOP;
 			Close idsClientes;
-		
+			SET FOREIGN_KEY_CHECKS=1;
 		if err then rollback;
 		else commit;
 		END IF;
@@ -100,16 +93,6 @@ BEGIN
     END if;
 END %%;
 DELIMITER ;
-
-SELECT * FROM Aula where idPersonal_Trainer = 7;
-SELECT * FROM Aula where idPersonal_Trainer = 8;
-SELECT * FROM Funcionário_tem_Horário where idFuncionário = 7;
-SELECT * FROM Funcionário_tem_Horário where idFuncionário = 8;
-
-SELECT idAula from Aula
-				where idPersonal_Trainer = 7;
-
-call SwapScheduleFromWorkers(8,7, '2018-11-02');
 
 
 DROP PROCEDURE IF EXISTS `SwapScheduleFromWorkers`;

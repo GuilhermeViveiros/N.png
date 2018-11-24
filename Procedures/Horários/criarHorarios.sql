@@ -1,7 +1,8 @@
-DROP PROCEDURE IF EXISTS criarHorarios;
+
+USE `Npng`;
+DROP procedure IF EXISTS `criarHorarios`;
 
 DELIMITER %%
-
 CREATE DEFINER=`root`@`localhost` PROCEDURE `criarHorarios`(dataInicio Date, dataFinal Date)
 BEGIN
 	if dataInicio < dataFinal THEN
@@ -9,7 +10,6 @@ BEGIN
 				call criarHorarioDia(dataInicio);
                 call criarTurnoDia(dataInicio);
                 call darHorarios(dataInicio);
-                call darHorarioMusculacao(dataInicio);
                 
 				SET dataInicio = ADDDATE(dataInicio, 1);
 				if dataInicio < dataFinal THEN
@@ -19,4 +19,5 @@ BEGIN
 		END LOOP datas;
 	END if;
 END %%
+
 DELIMITER ;

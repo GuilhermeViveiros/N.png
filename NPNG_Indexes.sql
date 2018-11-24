@@ -1,4 +1,6 @@
 CREATE INDEX ClientByNIF ON Cliente (Nif)
 	USING HASH;
 
--- SELECT * FROM Cliente where Nif = "251218194"
+CREATE INDEX ClientFoiAula ON Cliente_frequentou_Aula_com_Horário (idCliente);
+
+CREATE INDEX HorarioDasAulas ON Aula_tem_Horário (idAula);

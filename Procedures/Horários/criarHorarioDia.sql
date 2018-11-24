@@ -1,5 +1,5 @@
-USE Npng;
-Drop procedure IF EXISTS `criarHorarioDia`;
+USE `Npng`;
+DROP procedure IF EXISTS `criarHorarioDia`;
 
 DELIMITER %%
 CREATE DEFINER=`root`@`localhost` PROCEDURE `criarHorarioDia`(dia date)
@@ -32,5 +32,7 @@ BEGIN
 		END if;
 		leave horarios;
     END LOOP;
-END %%
+END%%
+
 DELIMITER ;
+

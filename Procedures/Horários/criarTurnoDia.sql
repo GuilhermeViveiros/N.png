@@ -1,9 +1,8 @@
-USE Npng;
-Drop procedure IF EXISTS `criarTurnoDia`;
+USE `Npng`;
+DROP procedure IF EXISTS `criarTurnoDia`;
 
 DELIMITER %%
-CREATE DEFINER=`root`@`localhost` PROCEDURE `criarTurnoDia` (In dia Date)
-
+CREATE DEFINER=`root`@`localhost` PROCEDURE `criarTurnoDia`(In dia Date)
 BEGIN
 	if DAYNAME(dia) in ('Sunday', 'Saturday') then
 		insert Into Horário Values
@@ -15,6 +14,6 @@ BEGIN
             (CONCAT(dia,' ', '13:00:00'), CONCAT(dia, ' ', '18:00:00')),
             (CONCAT(dia,' ', '18:00:00'), CONCAT(dia, ' ', '23:00:00'));
 	END if;
-END %%
-DELIMITER ;
+END%%
 
+DELIMITER ;

@@ -1,8 +1,8 @@
-USE Npng;
-Drop procedure IF EXISTS `darHorarioMusculacao`;
+
+USE `Npng`;
+DROP procedure IF EXISTS `darHorarioMusculacao`;
 
 DELIMITER %%
-
 CREATE DEFINER=`root`@`localhost` PROCEDURE `darHorarioMusculacao`(dia Date)
 BEGIN
 	if DAYNAME(dia) in ('Sunday', 'Saturday') then
@@ -26,5 +26,7 @@ BEGIN
             (3,CONCAT(dia,' 8:00;00'), CONCAT(dia, ' 9:00:00')),
             (3,CONCAT(dia,' 21:00;00'), CONCAT(dia, ' 23:00:00'));
 	END if;
-END %%
+END%%
+
+>>>>>>> 91649a69f26310b75b160bb0e8828e576520c1e4:Procedures/Horários/darHorarioMusculacao.sql
 DELIMITER ;
