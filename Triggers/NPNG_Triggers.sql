@@ -53,15 +53,6 @@ CREATE TRIGGER remPT BEFORE DELETE ON Personal_Trainer
 		End %%
 DELIMITER ;	
 
-DROP TRIGGER IF EXISTS remPT2;
-DELIMITER %%
-CREATE TRIGGER remPT2 AFTER DELETE ON Personal_Trainer
-	For each row
-		Begin
-			DELETE FROM Funcionário where idFuncionário = OLD.idFuncionário;
-		End %%
-DELIMITER ;	
-
 DROP TRIGGER IF EXISTS remFuncionário;
 DELIMITER %%
 CREATE TRIGGER remFuncionário BEFORE DELETE ON Funcionário 
@@ -78,21 +69,18 @@ CREATE TRIGGER remFuncionário BEFORE DELETE ON Funcionário
 			DELETE FROM Funcionário_tem_Horário where idFuncionário = OLD.idFuncionário;
 		End %%
 DELIMITER ;	
-            
--- SELECT * FROM Máquina;
--- SELECT * FROM Plano_de_Treino_Recomenda_Máquina;
-
+		
 DROP TRIGGER IF EXISTS insertClienteTeveAula;
 DELIMITER %%
 CREATE TRIGGER insertClienteTeveAula BEFORE INSERT ON Cliente_frequentou_Aula_com_Horário 
 	For each row 
 		Begin
 			DECLARE numAlunos int default 0;
-            DECLARE lotacao int default 0;
-			SET numAlunos = (SELECT Count(0) FROM Cliente_frequentou_Aula_com_Horário
-				where idAula = NEW.idAula and Horário_Início = New.Horário_Inicio and Horário_Fim = New.Horário_Fim);
-			SET lotacao = (SELECT lotação FROM Aula where idAula = NEW.idAula);
-            if numAlunos > lotacao THEN
+			DECLARE lotacao int default 0;
+			SET numAlunos = (SELECT Count(idCliente) FROM Cliente_frequentou_Aula_com_Horário
+						where idAula = NEW.idAula and Horário_Inicio = NEW.Horário_Inicio and Horário_Fim = NEW.Horário_Fim);
+			SET lotacao = LotaçãoAula(NEW.idAula);
+            if numAlunos >= lotacao THEN
 				SET NEW.idAula = null;
             END if;
 		End %%

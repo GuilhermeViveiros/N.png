@@ -6,7 +6,7 @@ Drop procedure IF EXISTS `ClassesOfPT`;
 DELIMITER %%
 CREATE PROCEDURE `ClassesOfPT` (x int)
 BEGIN
-	SELECT * FROM Aula where idPersonal_Trainer = 1;
+	SELECT * FROM Aula where idPersonal_Trainer = x;
 END %%
 DELIMITER ;
 
@@ -38,7 +38,7 @@ BEGIN
 			on P.idPacote = CP.idPacote
 				inner join Cliente as C
 					on C.idCliente = CP.idCliente
-						where P.id_Personal_Trainer = 7;
+						where P.id_Personal_Trainer = x;
 END %%
 DELIMITER ;
 
