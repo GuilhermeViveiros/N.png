@@ -1,6 +1,14 @@
+USE Npng;
+
 CREATE INDEX ClientByNIF ON Cliente (Nif)
 	USING HASH;
+    
+CREATE INDEX ClientByNome ON Cliente (Nome);
 
-CREATE INDEX ClientFoiAula ON Cliente_frequentou_Aula_com_Horário (idCliente);
+CREATE INDEX AulaByNome On Aula (Nome);
 
-CREATE INDEX HorarioDasAulas ON Aula_tem_Horário (idAula);
+CREATE INDEX FuncionárioByNome on Funcionário (Nome);
+
+CREATE INDEX PacoteByNome on Pacote (Nome);
+
+CREATE INDEX MáquinaByNome on Máquina (Nome);
