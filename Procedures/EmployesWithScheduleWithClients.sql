@@ -1,3 +1,7 @@
+USE `Npng`;
+DROP procedure IF EXISTS `EmployesWithScheduleWithClients`;
+
+DELIMITER %%
 CREATE DEFINER=`root`@`localhost` PROCEDURE `EmployesWithScheduleWithClients`(Id Int , X DateTime , Y DateTime)
 BEGIN
 	Select  F.Nome , F.Categoria , F.Email From Aula as A 
@@ -14,4 +18,5 @@ BEGIN
 											inner join Cliente as C
 												on C.idCliente = CP.idCliente
 													where C.Nome = Id; 
-END
+END %%
+DELIMITER ;
