@@ -10,9 +10,7 @@ BEGIN
 END %%
 DELIMITER ;
 
-
 Drop procedure IF EXISTS `OldClientsOfPT`;
-
 -- ver os Clientes que teve
 DELIMITER %%
 CREATE PROCEDURE `OldClientsOfPT` (x int)
@@ -27,8 +25,6 @@ DELIMITER ;
 
 
 Drop procedure IF EXISTS `ActualClientsOfPT`;
-
-
 -- Clientes atuais do Personal Trainer
 DELIMITER %%
 CREATE PROCEDURE `ActualClientsOfPT` (x int)

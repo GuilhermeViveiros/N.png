@@ -1,3 +1,7 @@
+USE `Npng`;
+DROP procedure IF EXISTS `Top5Classes`;
+
+DELIMITER %%
 CREATE DEFINER=`root`@`localhost` PROCEDURE `Top5Classes`(X DateTime , Y DateTime)
 BEGIN
 	Select A.Nome , count(0) from Aula as A
@@ -12,4 +16,5 @@ BEGIN
 									group by A.idAulA
 										order by count(0) desc
 											limit 5;
-END
+END %%
+DELIMITER ;
