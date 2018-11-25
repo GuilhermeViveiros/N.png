@@ -1,3 +1,7 @@
+USE `Npng`;
+DROP procedure IF EXISTS `ClientHadPersonalTrainer`;
+
+DELIMITER %%
 CREATE PROCEDURE `ClientHadPersonalTrainer` (Id Int)
 BEGIN
 	Select C.Nome , C.Nif , F.Nome,  C_teve_PT.Reclamação from Cliente as C 
@@ -8,4 +12,5 @@ BEGIN
 					inner join Funcionário as F 
 						on F.idFuncionário = PT.idFuncionário
 							where C.idCliente = Id;
-END
+END %%
+DELIMITER ;
