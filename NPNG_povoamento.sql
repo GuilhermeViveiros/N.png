@@ -12,7 +12,12 @@ SET SQL_SAFE_UPDATES = 0;
 -- Base de dados de trabalho
 USE Npng;
 
-
+-- SELECT 
+   --   table_schema as `Database`, 
+   --   table_name AS `Table`, 
+   --   round(((data_length) / 1024 ), 2)
+-- FROM information_schema.TABLES 
+-- ORDER BY (table_schema) DESC;
 
 -- Povoamento da tabela "Funcionário"
 INSERT INTO Funcionário
@@ -160,6 +165,8 @@ INSERT INTO Aula
 -- Povoamento da tabela Aula_tem_Horário
 call criarHorarios('2018-11-01', '2018-11-30');
 
+SELECT * from Aula where idAula = 4;
+SELECT * from Cliente_frequentou_Aula_com_Horário where idAula = 4;
 
 -- Povoamento da tabela Cliente_frequentou_Aula_com_Horário
 INSERT INTO Cliente_frequentou_Aula_com_Horário
@@ -171,7 +178,6 @@ INSERT INTO Cliente_frequentou_Aula_com_Horário
         (2,1,'2018-11-15 8:00:00','2018-11-15 10:00:00'),
         (2,3,'2018-11-16 12:00:00','2018-11-16 14:00:00'),
         (2,6,'2018-11-19 18:00:00','2018-11-19 20:00:00'),
-        
         (3,1,'2018-11-01 8:00:00','2018-11-01 10:00:00'),
         (3,3,'2018-11-02 12:00:00','2018-11-02 14:00:00'),
         (3,6,'2018-11-05 18:00:00','2018-11-05 20:00:00'),
@@ -184,8 +190,6 @@ INSERT INTO Cliente_frequentou_Aula_com_Horário
         (3,1,'2018-11-22 8:00:00','2018-11-22 10:00:00'),
         (3,3,'2018-11-23 12:00:00','2018-11-23 14:00:00'),
         (3,6,'2018-11-26 18:00:00','2018-11-26 20:00:00');
-        
-
 
 
 -- Povoamento da tabela "AulasRecomendadas"

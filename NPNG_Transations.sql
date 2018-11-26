@@ -39,11 +39,6 @@ BEGIN
 				if @oldPT is not null then
 					INSERT INTO Cliente_teve_Personal_Trainer (idCliente, idPersonal_Trainer, Justificação)
 						VALUE(id, @oldPt, justif);
-                        -- SELECT * FROM (SELECT id, @oldPt, justificação)
-							-- where not exists(
-							-- SELECT * FROM Cliente_teve_Personal_Trainer
-									-- where idCliente = id and idPersonal_Trainer = @oldPt
-                            -- ) Limit 1;
 				END if;        
 				ITERATE insertLOOP;
 			END LOOP;

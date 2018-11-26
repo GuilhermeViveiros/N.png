@@ -91,3 +91,27 @@ Select Count(0) From Pacote;
 
 -- Qual o funcionário com a melhor classificação 
 Select * From PtWithBetterPoints;
+
+-- Quais as aulas que haverá num intervalo de 7 dias
+SELECT * FROM AulasNaProximaSemana;
+
+-- Quais os clientes que não possuem pacotes válidados atualemte
+SELECT * FROM ClientesSemPacoteAtual;
+
+-- Mostra todos os clientes que têm PTs atualmente
+SELECT * FROM ClientesWithPersonalTrainer;
+
+-- Mostra todos os dados de planos de Treino de todos os clientes
+SELECT * FROM DadosDePlanosDeTreinoDeClientes;
+
+-- Mostra os pacotes que têm mais clientes por ordem decrescente de numero
+SELECT * FROM PacotesWithMostClientes;
+
+-- Mostra os top5 clientes que mais gastaram no ginásio
+SELECT * FROM Top5Clientes;
+
+-- Mostra o top10 de clientes que mais foram às aulas
+select * FROM Top10ClientesAula;
+
+-- Mostra o numero de clientes que foram a todas as aulas, !!!!!!!!!! por em procedure
+SELECT * FROM NumeroClientesPorAula
