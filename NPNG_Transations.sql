@@ -1,16 +1,6 @@
 use Npng;
 
-SELECT * FROM Cliente_teve_Personal_Trainer;
-SELECT * FROM Pacote;
-SELECT * FROM Cliente_tem_Pacote;
-SELECT * FROM Personal_Trainer;
-
-SELECT id_Personal_Trainer from Pacote where idPacote = 1;
-
-call addPT_To_Pacote(1, 1, "testing");
-
 Drop procedure IF EXISTS `addPT_To_Pacote`;
-
 DELIMITER %%
 CREATE DEFINER=`root`@`localhost` PROCEDURE `addPT_To_Pacote`(in idPT int, in idPac int, in justif VARCHAR(200))
 BEGIN
@@ -51,12 +41,7 @@ END %%
 DELIMITER ;
 
 
-SELECT * FROM AulasRecomendadas;
-SELECT * FROM Aula;
-call addAulas_To_PlanoDeTreino(1, "5,2", "fitness");
-
 DROP PROCEDURE IF EXISTS `addAulas_To_PlanoDeTreino`;
-
 DELIMITER %%
 CREATE DEFINER=`root`@`localhost` PROCEDURE `addAulas_To_PlanoDeTreino`(in planoTreino int, in idAulas VARCHAR(200), in just VARCHAR(200) )
 BEGIN
@@ -151,5 +136,27 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `SwapScheduleFromWorkers`(in w1 int,
         if err then rollback;
 			else commit;
 		END IF;        
+    END %%
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS RemoverPersonalTrainer;
+DELIMITER %%
+CREATE PROCEDURE RemoverPersonalTrainer(in id int)
+	Begin
+		START TRANSACTION;
+        BEGIN
+			DECLARE err int default 0;
+			DECLARE CONTINUE HANDLER FOR SQLEXCEPTION SET err = 1;
+			
+			SET FOREIGN_KEY_CHECKS=0;
+			DELETE FROM Personal_Trainer where idFuncionário = id;
+			Update Funcionário SET Categoria = "SemCategoria" where idFuncionário = id;
+			Update Pacote SET id_Personal_Trainer = null where id_Personal_Trainer = id;
+			SET FOREIGN_KEY_CHECKS=1;
+            
+            if err THEN rollback;
+            else commit;
+            END if;
+        END;
     END %%
 DELIMITER ;
