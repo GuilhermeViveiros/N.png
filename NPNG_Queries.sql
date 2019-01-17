@@ -19,19 +19,19 @@ SET SQL_SAFE_UPDATES = 0;
 
 -- Uma função apenas devolve STRING <> INTEGER <> REAL <> DECIMAL
 
+
 -- ---------------------------------------------------------------------------------------Procedures -------------------------------------------------------------------------------------------------------------------------------
 
--- Quais os clientes que teem aulas num certo horário
-call ShowClassesFromClientsWithSchedule(1, '2017-01-01 10:00:00' , '2017-01-06 10:00:00' );
+-- Quais as aulas que um cliente tem num certo horário
+call ShowClassesFromClientsWithSchedule(1, '2018-11-08 10:00:00' , '2018-11-08 12:00:00' );
 
 
 -- Quais as aulas que foram dadas num certo horário? Function
 call ClassesWithSchedule('2017-01-01 10:00:00' , '2017-01-06 10:00:00');
 
 
--- Quais o clientes que tiveram a aula X  num certo horário Y num certo dia da semana? Function
-call ClientsWithClassWithSchedule(1,1,'2017-01-01 10:00:00' , '2017-01-06 10:00:00');
-    
+-- Quais o clientes que tiveram a aula X  num certo horário Y 
+call ClientsWithClassWithSchedule(2,'2018-11-08 10:00:00' , '2018-11-08 12:00:00');
 
 
 -- Quais as aulas disponíveis a um cliente X
@@ -52,17 +52,6 @@ call EmployesWithScheduleWithClients(1,'2017-01-01 10:00:00' , '2017-01-01 20:00
 -- Qual as top 5 aulas num certo intervalo de tempo
 call Top5Classes('2017-01-01 10:00:00', '2017-01-06 10:00:00' );
 
-
-
--- Quais as 5 aulas que foram dadas pelo funcionário com mais classificação de X a Y
--- Versão do sql não suporta este tipo de subquerrys ???
-Select * from Aula as A where idPersonal_Trainer in
-	(Select F.idFuncionário  from Personal_Trainer as PT  -- estou a chamar o PT com melhor classificação noutra funcção (ver view)
-		inner join Funcionário as F 
-			on F.idFuncionário = PT.idFuncionário
-				order by PT.Classificação desc
-					limit 1)
-						limit 5;
 
 
 -- Adicionar um pacote a um cliente x

@@ -3,7 +3,7 @@ DROP procedure IF EXISTS `ClientsWithClassWithSchedule`;
 
 
 DELIMITER %%
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ClientsWithClassWithSchedule`(Cliente Int , Aula Int , X DateTime , Y DateTime)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ClientsWithClassWithSchedule`(Aula Int , X DateTime , Y DateTime)
 BEGIN
 Select * From Cliente as C where idCliente in
 	(select idCliente from Cliente_tem_Pacote where idPacote in
