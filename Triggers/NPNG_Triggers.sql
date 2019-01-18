@@ -41,18 +41,6 @@ CREATE TRIGGER remAula BEFORE DELETE ON Aula
 		End %%
 DELIMITER ;
 
-DROP TRIGGER IF EXISTS remPT;
-DELIMITER %%
-CREATE TRIGGER remPT BEFORE DELETE ON Personal_Trainer
-	For each row
-		Begin
-			UPDATE Pacote SET id_Personal_Trainer = null
-				where id_Personal_Trainer = OLD.idFuncionário;
-            DELETE FROM Aula where idPersonal_Trainer = OLD.idFuncionário;
-            DELETE FROM Cliente_teve_Personal_Trainer where idPersonal_Trainer = OLD.idFuncionário;
-		End %%
-DELIMITER ;	
-
 DROP TRIGGER IF EXISTS remFuncionário;
 DELIMITER %%
 CREATE TRIGGER remFuncionário BEFORE DELETE ON Funcionário 

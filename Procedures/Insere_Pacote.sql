@@ -2,7 +2,7 @@ USE `Npng`;
 DROP procedure IF EXISTS `Insere_Pacote`;
 
 DELIMITER %%
-CREATE DEFINER=`root`@`localhost` PROCEDURE `Insere_Pacote`(Nome VARCHAR(45), PT INT , NT INT, )
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Insere_Pacote`(Nome VARCHAR(45), PT INT , NT INT)
 BEGIN
 	
     

@@ -44,21 +44,19 @@ call ClientHadPersonalTrainer(1);
 
 
 -- Quais os funcionários que deram aulas ao cliente X num intervalo de tempo de Y a Z
-call EmployesWithScheduleWithClients(1,'2017-01-01 10:00:00' , '2017-01-01 20:00:00');
+call EmployesWithScheduleWithClients(2,'2018-11-01 10:00:00' , '2018-11-01 20:00:00');
 
 
 
 
 -- Qual as top 5 aulas num certo intervalo de tempo
-call Top5Classes('2017-01-01 10:00:00', '2017-01-06 10:00:00' );
+call Top5Classes('2018-11-01 10:00:00', '2018-11-20 10:00:00' );
 
 
 
 -- Adicionar um pacote a um cliente x
 -- Necessário um id do cliente, id do Pacote , data de inicio e data final Id Int
-call AddPackageForClient(x,x,x,x);
-
-
+call AddPackageForClient(1,2,'2018-01-01 10:00:00','2018-03-01 10:00:00');
 
 
 -- ---------------------------------------------------------------------------------------Triggers -------------------------------------------------------------------------------------------------------------------------------
